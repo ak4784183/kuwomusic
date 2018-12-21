@@ -32,7 +32,9 @@ function checkinput(which) {
 	}
 	if(regtxt.test(which.value)) {
 		return;
-	} else {
+	} else if(regtxt.test("")){
+        return;
+	}else {
 		which.parentNode.nextSibling.nextSibling.innerHTML = which.getAttribute("warning");
 		which.parentNode.style.border = "1px solid red";
 	}

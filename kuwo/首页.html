@@ -226,29 +226,42 @@
 		<a class="tabRight" id="tabRight" style="display: none;">
 			<span></span>
 		</a>
-		<ul id="lunbo" style="width: 13000px;left: 0px;">
+		<ul id="lunbo" style="width: 13000px;left: 0px;overflow: hidden;">
+            <li>
+				<img class="bannerItem"  id="img" src="img/1542168422290_.jpg">
+				<a><div class="splice opacity50"></div></a>
+			</li>
+
 			<li>
-				<img class="bannerItem"  id="img" src="img/1542089773929_.jpg">
+				<img class="bannerItem"  id="img" src="img/1542504733464_.jpg" title="0">
 				<a><div class="splice opacity50"></div></a>
 			</li>
 			<li>
-				<img class="bannerItem"  id="img" src="img/1542423362435_.jpg">
+				<img class="bannerItem"  id="img" src="img/1542423362435_.jpg" title="1">
 				<a><div class="splice opacity50"></div></a>
 			</li>
 			<li>
-				<img class="bannerItem"  id="img" src="img/1542504733464_.jpg">
+				<img class="bannerItem"  id="img" src="img/1542089773929_.jpg" title="2">
+				<a><div class="splice opacity50"></div></a>
+			</li>
+			<li>
+				<img class="bannerItem"  id="img" src="img/1542351105448_.jpg" title="3">
+				<a><div class="splice opacity50"></div></a>
+			</li>
+			<li>
+				<img class="bannerItem"  id="img" src="img/1487577506062_.jpg" title="4">
+				<a><div class="splice opacity50"></div></a>
+			</li>
+			<li>
+				<img class="bannerItem"  id="img" src="img/1480068109864_.jpg" title="5">
+				<a><div class="splice opacity50"></div></a>
+			</li>
+			<li>
+				<img class="bannerItem"  id="img" src="img/1542504733464_.jpg" >
 				<a><div class="splice opacity50"></div></a>
 			</li>
 			<li>
 				<img class="bannerItem"  id="img" src="img/1542168422290_.jpg">
-				<a><div class="splice opacity50"></div></a>
-			</li>
-			<li>
-				<img class="bannerItem"  id="img" src="img/1542089773929_.jpg">
-				<a><div class="splice opacity50"></div></a>
-			</li>
-			<li>
-				<img class="bannerItem"  id="img" src="img/1542423362435_.jpg">
 				<a><div class="splice opacity50"></div></a>
 			</li>
 			
@@ -996,44 +1009,76 @@ $("#banner").mouseout(function() {
     $("#tabRight").css("display", "none");
 })
 
-var index = 0;
+var index=0;
 
-var intervalId = setInterval(function() {
-    index = index + 1;
+
+function changePic() {
+
+	index = parseInt($("#pointBox .active").attr("title"))+1;
+   
     $("#lunbo").css("left", -index * 1600 + "px");
     $("#lunbo").css("transition", "all 2s");
+    $("#pointBox a").eq(index).attr("class", "active");
+    $("#pointBox a").eq(index).siblings().removeClass("active");
 
     if (index == 6) {
         index = 0;
         $("#lunbo").css("left", "0px");
-    }
-
-    if ($("#tabLeft").click()==true) {
-        index = index + 1;
-
-        clearInterval(intervalId);
-        $("#lunbo").css("left", index * 1600 + "px");
+        $("#pointBox a").eq(index).attr("class", "active");
+        $("#pointBox a").eq(index).siblings().removeClass("active");
 
     }
 
-    if ($("#tabRight").click()==true) {
-        index = index - 1;
-        clearInterval(intervalId);
-        $("#lunbo").css("left", -index * 1600 + "px");
+}
+var keepTime = setInterval(changePic,4000);
+$("#tabLeft").click(function(){
+    	
+    	clearInterval(keepTime);
+    	var x=parseInt($("#pointBox .active").attr("title"))-1;
 
-    }
+    	if (x==-1) {
+        	x=5;
+        }
+    	$("#lunbo").css("left", -x * 1600 + "px");
+    	$("#lunbo").css("transition", "all 1s");
+    	$("#pointBox a").eq(x).attr("class", "active");
+        $("#pointBox a").eq(x).siblings().removeClass("active");
+        
+        
+        
 
-},
-4000);
+        keepTime = setInterval(changePic,4000);
+    	
+
+    })
+
+$("#tabRight").click(function(){
+		
+        clearInterval(keepTime);
+    	var y=parseInt($("#pointBox .active").attr("title"))+1;
+    	
+    	if (y==6) {
+        	y=0;
+        }
+    	$("#lunbo").css("left", -y * 1600 + "px");
+    	$("#lunbo").css("transition", "all 1s");
+    	$("#pointBox a").eq(y).attr("class", "active");
+        $("#pointBox a").eq(y).siblings().removeClass("active");
+       
+        
+        keepTime = setInterval(changePic,4000);
+
+    })
 
 $("#pointBox a").click(function() {
-    clearInterval(intervalId);
+    clearInterval(keepTime);
     $(this).attr("class", "active");
     $(this).siblings().removeClass("active");
     var title = $(this).attr("title");
 
     $("#lunbo").css("left", -title * 1600 + "px");
     $("#lunbo").css("transition", "all 2s");
+    keepTime = setInterval(changePic,4000);
 
 })
 

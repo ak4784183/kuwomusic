@@ -277,6 +277,13 @@ body {
 	position:absolute;
 	bottom:0;
 }
+#soundBox .soundBox #soundPro .soundPro2 {
+	width:3px;
+	height:0px;
+	background:#ffcd2d;
+	position:absolute;
+	bottom:0;
+}
 #soundBox .soundBox #soundPro #wp_volBtn {
 	width:9px;
 	height:9px;

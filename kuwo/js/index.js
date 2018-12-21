@@ -99,10 +99,10 @@
     //静音
 	$("#wp_mute").click(function(){
 		if (flag==false) {
-			$("#soundBox").css("display","block");
+			$("#mymusic")[0].muted=true;
 			flag=true;
 		} else {
-			$("#soundBox").css("display","none");
+			$("#mymusic")[0].muted=false;
 			flag=false;
 		}
 	})
